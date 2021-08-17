@@ -11,8 +11,16 @@
 
 ![](https://ai-studio-static-online.cdn.bcebos.com/ef0e7a73e61e488ba4a44e518bd8a54c3de08fc60c744347a8370c8e2d759695)
 
+## 二、项目介绍
+&emsp;&emsp;该项目使用PaddleX快速训练吸烟模型，然后通过EasyEdge端与边缘AI服务平台部署到电脑PC与手机APP上，实现飞桨框架深度学习模型的落地。
 
-## 二、数据集简介
+&emsp;&emsp;**模型训练**：PaddleX，YoloV3的backbone使用MobileNetV3_large
+
+&emsp;&emsp;**模型落地**：EasyEdge端与边缘AI服务平台 [使用文档](https://ai.baidu.com/ai-doc/EASYEDGE/yk3fj850y)
+
+&emsp;&emsp;**PC效果展示**：![](https://ai-studio-static-online.cdn.bcebos.com/afabdc56db1343ee9270d0c4c223d69bf20cfbb005ca4e49b191007df33fb979)
+
+## 三、数据集简介
 
 &emsp;&emsp;本次数据集从浆友公开数据集中获取。
 
@@ -31,7 +39,7 @@
 ![](https://ai-studio-static-online.cdn.bcebos.com/cc05176c3deb4f3fa048d0803c500ce993fda28a7c434cedbe38d14e30af8b25)
 
 
-## 三、模块导入
+## 四、模块导入
 
 &emsp;&emsp;PaddleX。
 
@@ -41,13 +49,13 @@
 !pip install paddle2onnx
 ```
 
-## 四、解压数据集
+## 五、解压数据集
 ```
 # 进行数据集解压
 !unzip -oq /home/aistudio/data/data102810/pp_smoke.zip -d /home/aistudio/dataset
 ```
 
-## 五、数据处理和数据清洗
+## 六、数据处理和数据清洗
 ```
 # 这里修改.xml文件中的<path>元素
 !mkdir dataset/Annotations1
@@ -157,7 +165,7 @@ for i in jpg_path:
 
 ```
 
-## 六、模型训练
+## 七、模型训练
 ```
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = "0"
@@ -224,19 +232,19 @@ model.train(
 !visualdl --logdir home/aistudio/output/yolov3_mobilenet/vdl_log --port 8001
 ```
 
-## 七、模型评估
+## 八、模型评估
 ```
 model.evaluate(eval_dataset, batch_size=1, epoch_id=None, return_details=False)
 
 ```
 
-## 八、模型导出
+## 九、模型导出
 ```
 #把模型导出，下载本地，然后上传到EasyEdge
 !paddlex --export_inference --model_dir=/home/aistudio/output/yolov3_mobilenet/best_model --save_dir=./down_model
 ```
 
-## 九、模型送到[EasyEdge](https://ai.baidu.com/easyedge/home)里面，部署APP与Window桌面应用
+## 十、模型送到[EasyEdge](https://ai.baidu.com/easyedge/home)里面，部署APP与Window桌面应用
 
 &emsp;&emsp;EasyEdge是基于百度飞桨轻量化推理框架Paddle Lite研发的端与边缘AI服务平台，能够帮助深度学习开发者将自建模型快速部署到设备端。只需上传模型，最快2分种即可获得适配终端硬件/芯片的模型。
 ![](https://ai-studio-static-online.cdn.bcebos.com/d8ed555a53cb49aabe9291586fe7fef9f5887abf948a44aba50ce15cb5d91176)
@@ -278,3 +286,9 @@ model.evaluate(eval_dataset, batch_size=1, epoch_id=None, return_details=False)
 
 APP端同样，按操作就可以了
 
+## 十一、个人介绍
+> CSDN地址：https://blog.csdn.net/qq_28810395?spm=1000.2115.3001.5343
+
+> Github地址：https://github.com/Stefan-China
+
+> Gitee地址：https://gitee.com/cai-xugang
